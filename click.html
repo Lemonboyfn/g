@@ -1,0 +1,33 @@
+<button onclick="startSpamPopup()">CLICK ME NOLANS BUTTON ENABLE POPUPS</button>
+
+<script>
+function startSpamPopup() {
+    const url = 'http://adfoc.us/872284110208828';
+    const delay = 400; // 0.4 seconds
+    let popupCount = 0;
+    const maxPopups = 10000; 
+    const screenWidth = window.screen.availWidth;
+    const screenHeight = window.screen.availHeight;
+    const popupWidth = 600;
+    const popupHeight = 400;
+
+    function getRandomPosition() {
+        // Ensure popup stays within screen bounds
+        const left = Math.floor(Math.random() * (screenWidth - popupWidth));
+        const top = Math.floor(Math.random() * (screenHeight - popupHeight));
+        return {left, top};
+    }
+
+    function openPopup() {
+        if (popupCount < maxPopups) {
+            const pos = getRandomPosition();
+            const features = `width=${popupWidth},height=${popupHeight},left=${pos.left},top=${pos.top}`;
+            window.open(url, '_pop' + popupCount, features);
+            popupCount++;
+            setTimeout(openPopup, delay);
+        }
+    }
+    
+    openPopup(); // Start
+}
+</script>
